@@ -18,6 +18,7 @@ fn day2_pt1() -> io::Result<i32> {
         //println!("--  {:?}  --", line);
         let mut game_num = 0;
         let mut max_values = HashMap::new();
+        let mut min_values = HashMap::new();
         match line {
             Ok(line) => {
                 let parts: Vec<&str> = line.split(|c| c == ':').collect();
@@ -39,18 +40,29 @@ fn day2_pt1() -> io::Result<i32> {
                 }
                 // collect the 3 color maximum values in the hashmap "max_values"
                 if let Some(colors) = parts.last() {
+                    //split for each draw
                     let sets:Vec<&str> = colors.split(';').collect();
+                    //for each set drawn
                     for set in sets {
+                        //get vec[number,color] for each in set
                         let color_values: Vec<&str> = set.split(',').map(|s| s.trim()).collect();
+                        //for each color value
                         for cv in color_values {
+                            //split whitespace between number and color
                             let cv_parted: Vec<&str> = cv.split_whitespace().collect();
                             if cv_parted.len() == 2 {
+                                // if part number is number:
                                 if let Ok(value) = cv_parted[0].parse::<i32>() {
+                                    // access hashmap and get ot insert value
                                     let current_max = max_values.entry(cv_parted[1]).or_insert(0);
+                                    let current_min = min_values.entry(cv_parted[1]).or_insert(99);
+                                    // what is bigger?
                                     if value > *current_max {
                                         //println!("set new max form {} to {}",current_max,value);
                                         *current_max = value;
                                     }
+                                    // what is smaller?
+                                    if value < *current_min {}
                                 } else {
                                     println!("Failed to parse value {}", cv_parted[0])
                                 }
