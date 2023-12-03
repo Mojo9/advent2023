@@ -76,7 +76,7 @@ fn main() -> io::Result<()>{
 
             }
             Err(err) => {
-                eprintln!("Error in line 16")
+                eprintln!("Error in line 16: {err}", err)
             }
         }
 
