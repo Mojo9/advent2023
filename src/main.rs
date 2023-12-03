@@ -24,7 +24,6 @@ fn main() -> io::Result<()>{
                 // get the number of the game in a general way:
                 if let Some(game) = parts.first() {
                     let game_parts: Vec<&str> = game.split_whitespace().collect();
-
                     if let Some(number_str) = game_parts.get(1) {
                         if let Ok(game_number) = number_str.parse::<i32>() {
                             println!("-  game nr: {}  -", game_number);
@@ -72,15 +71,11 @@ fn main() -> io::Result<()>{
                 if hred <= &red && hgreen <= &green && hblue <= &blue {
                     sum = sum + game_num
                 }
-
-
             }
             Err(err) => {
                 eprintln!("Error in line 16: {}", err)
             }
         }
-
-
     }
     println!("----  Result: {}  ----",sum);
     Ok(())
