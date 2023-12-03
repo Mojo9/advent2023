@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io;
 use std::io::BufRead;
 
-fn main() -> io::Result<()>{
+fn day2_pt1() -> io::Result<i32> {
     let red = 12;
     let green = 13;
     let blue = 14;
@@ -15,7 +15,7 @@ fn main() -> io::Result<()>{
     println!("---  reader: {:?}  ---", &reader);
 
     for line in reader.lines() {
-        println!("--  {:?}  --", line);
+        //println!("--  {:?}  --", line);
         let mut game_num = 0;
         let mut max_values = HashMap::new();
         match line {
@@ -26,7 +26,7 @@ fn main() -> io::Result<()>{
                     let game_parts: Vec<&str> = game.split_whitespace().collect();
                     if let Some(number_str) = game_parts.get(1) {
                         if let Ok(game_number) = number_str.parse::<i32>() {
-                            println!("-  game nr: {}  -", game_number);
+                            //println!("-  game nr: {}  -", game_number);
                             game_num = game_number
                         } else {
                             println!("Failed to parse the number in string");
@@ -48,7 +48,7 @@ fn main() -> io::Result<()>{
                                 if let Ok(value) = cv_parted[0].parse::<i32>() {
                                     let current_max = max_values.entry(cv_parted[1]).or_insert(0);
                                     if value > *current_max {
-                                        println!("set new max form {} to {}",current_max,value);
+                                        //println!("set new max form {} to {}",current_max,value);
                                         *current_max = value;
                                     }
                                 } else {
@@ -61,10 +61,10 @@ fn main() -> io::Result<()>{
                     println!("The vector for colors is empty.");
                 }
                 // check if a value in the hashmap is bigger than the limit or rgb
-                for (color, value) in &max_values {
+                /*for (color, value) in &max_values {
                     println!("--  col {} :: val {}  --",color,value);
 
-                }
+                }*/
                 let hred = max_values.get("red").unwrap();
                 let hgreen = max_values.get("green").unwrap();
                 let hblue = max_values.get("blue").unwrap();
@@ -77,6 +77,11 @@ fn main() -> io::Result<()>{
             }
         }
     }
-    println!("----  Result: {}  ----",sum);
-    Ok(())
+    //println!("----  Result: {}  ----",sum);
+    Ok(sum)
+}
+
+fn main() {
+    let d2p1 = day2_pt1().expect("Error in day2_pt2");
+    println!("result day2_pt1: {}", d2p1);
 }
